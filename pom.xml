@@ -16,7 +16,6 @@
     <properties>
         <java.version>11</java.version>
         <spring.version>2.7.1</spring.version>
-        <spring.security.version>5.7.1</spring.security.version>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
