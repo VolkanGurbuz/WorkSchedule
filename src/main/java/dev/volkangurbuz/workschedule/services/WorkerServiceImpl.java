@@ -4,6 +4,8 @@ import dev.volkangurbuz.workschedule.model.Worker;
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +18,15 @@ public class WorkerServiceImpl implements WorkerService {
     this.workerRepository = workerRepository;
   }
 
+  public void createUser(UserDetails user) {
+    workerRepository.save((Worker) user);
+  }
+
   @Override
-  public Worker createNewWorker(Worker worker) {
-    return workerRepository.save(worker);
+  public UserDetails loadUserByUsername(String username) {
+    //    return workerRepository
+    //        .findWorkerByUsername(username)
+    //        .orElseThrow(() -> new UsernameNotFoundException("user not present"));
+    return null;
   }
 }

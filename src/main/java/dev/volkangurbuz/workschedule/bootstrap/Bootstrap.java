@@ -1,6 +1,5 @@
 package dev.volkangurbuz.workschedule.bootstrap;
 
-
 import dev.volkangurbuz.workschedule.config.BCryptPasswordEncoder;
 import dev.volkangurbuz.workschedule.model.Worker;
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository;
@@ -23,7 +22,7 @@ public class Bootstrap implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-    Worker worker = new Worker(1L, "Volkan", "Gurbuz", bCryptPasswordEncoder.encode("test"));
+    Worker worker = new Worker(1L, "VolkanGurbuz", bCryptPasswordEncoder.encode("test"));
     workerRepository.save(worker);
   }
 }

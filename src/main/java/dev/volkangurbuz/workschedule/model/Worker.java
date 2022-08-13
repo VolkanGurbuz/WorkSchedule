@@ -1,28 +1,24 @@
 package dev.volkangurbuz.workschedule.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "workers")
 public class Worker {
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
 
-  @Column(name = "first_name")
-  String firstName;
-
-  @Column(name = "last_name")
-  String lastName;
-
-  @Column(name = "password")
+  private String username;
   private String password;
 }
