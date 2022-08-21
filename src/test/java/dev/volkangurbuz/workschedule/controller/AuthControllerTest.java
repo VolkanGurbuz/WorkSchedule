@@ -2,7 +2,7 @@ package dev.volkangurbuz.workschedule.controller;
 
 import dev.volkangurbuz.workschedule.WorkScheduleApplication;
 import dev.volkangurbuz.workschedule.model.ERole;
-import dev.volkangurbuz.workschedule.model.Worker;
+import dev.volkangurbuz.workschedule.model.dto.WorkerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -49,10 +48,12 @@ class AuthControllerTest {
   @Test
   @DisplayName("post register")
   void postRegisterPage() throws Exception {
-    var dummyWorker = new Worker("dummyUser", "passwrod ", ERole.ROLE_ADMIN);
 
     mockMvc
-        .perform(post("/register/").flashAttr("worker", dummyWorker))
+        .perform(
+            post("/register/")
+                .flashAttr(
+                    "workerDTO", new WorkerDTO(1L, "dummyUser", "passwprd", ERole.ROLE_ADMIN)))
         .andExpect(status().isCreated());
   }
 }
