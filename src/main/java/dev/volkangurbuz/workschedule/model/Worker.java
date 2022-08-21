@@ -19,6 +19,16 @@ public class Worker {
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
 
-  private String username;
-  private String password;
+  String username;
+  String password;
+
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
+  ERole workerType;
+
+  public Worker(String username, String password, ERole workerType) {
+    this.username = username;
+    this.password = password;
+    this.workerType = workerType;
+  }
 }
