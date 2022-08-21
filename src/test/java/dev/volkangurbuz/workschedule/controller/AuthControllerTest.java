@@ -1,6 +1,8 @@
 package dev.volkangurbuz.workschedule.controller;
 
 import dev.volkangurbuz.workschedule.WorkScheduleApplication;
+import dev.volkangurbuz.workschedule.model.ERole;
+import dev.volkangurbuz.workschedule.model.Worker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,5 +44,15 @@ class AuthControllerTest {
   @DisplayName("get register page")
   void getRegisterPage() throws Exception {
     this.mockMvc.perform(get("/register/")).andDo(print()).andExpect(status().isOk());
+  }
+
+  @Test
+  @DisplayName("post register")
+  void postRegisterPage() throws Exception {
+    var dummyWorker = new Worker("dummyUser", "passwrod ", ERole.ROLE_ADMIN);
+
+    mockMvc
+        .perform(post("/register/").flashAttr("worker", dummyWorker))
+        .andExpect(status().isCreated());
   }
 }
