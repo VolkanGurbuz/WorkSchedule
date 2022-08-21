@@ -1,9 +1,7 @@
 package dev.volkangurbuz.workschedule.security;
 
-import dev.volkangurbuz.workschedule.model.Attempts;
 import dev.volkangurbuz.workschedule.model.ERole;
 import dev.volkangurbuz.workschedule.model.Worker;
-import dev.volkangurbuz.workschedule.repositories.AttemptsRepository;
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,10 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
@@ -49,15 +44,15 @@ public class AuthProvider implements AuthenticationProvider {
     String username = authentication.getName();
     String password = authentication.getCredentials().toString();
 
-    Worker student = repository.findWorkerByUsername(username).orElse(null);
-    if (student == null) {
+    Worker worker = repository.findWorkerByUsername(username).orElse(null);
+    if (worker == null) {
       throw new BadCredentialsException("Details not found");
     }
 
-    if (encoder.matches(password, student.getPassword())) {
+    if (encoder.matches(password, worker.getPassword())) {
       log.info("Successfully Authenticated the user");
       return new UsernamePasswordAuthenticationToken(
-          username, password, getStudentRoles(student.getWorkerType()));
+          username, password, getWorkerRoles(worker.getWorkerType()));
     } else {
       throw new BadCredentialsException("Password mismatch");
     }
@@ -69,7 +64,7 @@ public class AuthProvider implements AuthenticationProvider {
    * @param eRole
    * @return
    */
-  private List<GrantedAuthority> getStudentRoles(ERole eRole) {
+  private List<GrantedAuthority> getWorkerRoles(ERole eRole) {
     List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
 
     grantedAuthorityList.add(new SimpleGrantedAuthority(eRole.name()));
