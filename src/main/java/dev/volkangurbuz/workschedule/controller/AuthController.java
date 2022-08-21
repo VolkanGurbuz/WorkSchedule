@@ -1,9 +1,9 @@
 package dev.volkangurbuz.workschedule.controller;
 
+import dev.volkangurbuz.workschedule.model.ERole;
 import dev.volkangurbuz.workschedule.model.Worker;
 import dev.volkangurbuz.workschedule.model.dto.WorkerDTO;
 import dev.volkangurbuz.workschedule.services.WorkerServiceImpl;
-import dev.volkangurbuz.workschedule.utilities.results.Result;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -34,15 +34,12 @@ public class AuthController {
   @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)
   public String registerWorker(@ModelAttribute WorkerDTO workerDTO, Model model) {
+    workerDTO.setWorkerType(ERole.ROLE_USER);
+    var workerMap = modelMapper.map(workerDTO, Worker.class);
 
-    Worker workerMap = modelMapper.map(workerDTO, Worker.class);
-
-    Result result =
+    var result =
         workerService.register(
-            new Worker(
-                workerMap.getUsername(),
-                encoder.encode(workerMap.getPassword()),
-                workerMap.getWorkerType()));
+            new Worker(workerMap.getUsername(), encoder.encode(workerMap.getPassword())));
 
     model.addAttribute("result_message", result.getMessage());
 
