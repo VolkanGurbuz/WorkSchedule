@@ -3,7 +3,6 @@ package dev.volkangurbuz.workschedule.services;
 import dev.volkangurbuz.workschedule.model.Worker;
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository;
 import dev.volkangurbuz.workschedule.utilities.results.ErrorResult;
-import dev.volkangurbuz.workschedule.utilities.results.SuccessResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +13,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-public class WorkerServiceTest {
+class WorkerServiceTest {
 
   @InjectMocks WorkerServiceImpl workerService;
 
