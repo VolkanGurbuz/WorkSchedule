@@ -1,9 +1,9 @@
 package dev.volkangurbuz.workschedule.utilities.results;
 
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class Messages {
+
+  private Messages(){}
 
   public static final String WORKER_NOT_FOUND = "Worker is not found";
   public static final String WORKER_FOUND = "Worker is found";
