@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
-@Controller
+@RestController
 public class AuthController {
 
   private final WorkerServiceImpl workerService;
@@ -33,18 +33,39 @@ public class AuthController {
    */
   @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)
-  public String registerWorker(@ModelAttribute WorkerDTO workerDTO, Model model) {
-    workerDTO.setWorkerType(ERole.ROLE_USER);
+  public String registerWorker(@RequestBody WorkerDTO workerDTO, Model model) {
     var workerMap = modelMapper.map(workerDTO, Worker.class);
 
     var result =
         workerService.register(
-            new Worker(workerMap.getUsername(), encoder.encode(workerMap.getPassword())));
+            new Worker(workerMap.getUsername(), encoder.encode(workerMap.getPassword()), workerMap.getWorkerType()));
 
     model.addAttribute("result_message", result.getMessage());
 
-    return "register";
+    return result.getMessage();
   }
+
+  /**
+   * User who has logged in successfully can access this API
+   * @param username
+   * @return
+   */
+  @GetMapping("/workerInfo")
+  public Worker getStudentInfo(@RequestParam("username") String username) {
+    return workerService.loadUserByUsername(username);
+  }
+
+  /**
+   * User who has the role ROLE_WRITE can only access this API
+   * @param username
+   * @return
+   */
+  @GetMapping("/getWorkerRoles")
+  public String getWorkerRoles(@RequestParam("username") String username) {
+    return workerService.loadUserByUsername(username).getWorkerType().name();
+  }
+
+
 
   @ResponseStatus(HttpStatus.OK)
   @GetMapping("/register")

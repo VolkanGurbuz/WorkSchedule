@@ -18,12 +18,13 @@ public class Worker {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
-
+  @Column(name = "username")
   String username;
+  @Column(name = "password")
   String password;
 
   @Enumerated(EnumType.STRING)
-  @Column(length = 20)
+  @Column(length = 20, name = "roles")
   ERole workerType;
 
   public Worker(String username, String password, ERole workerType) {
