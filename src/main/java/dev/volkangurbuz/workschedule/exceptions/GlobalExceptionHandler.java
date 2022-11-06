@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
       RuntimeException exception, WebRequest request) {
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("timestamp", LocalDateTime.now());
-    body.put("message", "No config found");
+    body.put("message", "Internal server error");
 
     return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
 
