@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface WorkerService {
 
-  Worker loadUserByUsername(String username);
+  WorkerDetailsImpl loadUserByUsername(String username);
 
   Result register(Worker worker);
 }
