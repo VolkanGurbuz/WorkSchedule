@@ -1,5 +1,6 @@
 package dev.volkangurbuz.workschedule.services;
 
+import dev.volkangurbuz.workschedule.exceptions.EntityNotFoundException;
 import dev.volkangurbuz.workschedule.model.Worker;
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository;
 import dev.volkangurbuz.workschedule.utilities.results.ErrorResult;
@@ -10,15 +11,17 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WorkerServiceImpl implements WorkerService {
+public class WorkerServiceImpl implements WorkerService, UserDetailsService {
 
   final WorkerRepository workerRepository;
 
@@ -27,9 +30,10 @@ public class WorkerServiceImpl implements WorkerService {
   }
 
   @Override
-  public Worker loadUserByUsername(String username) {
-    var optionalWorker = workerRepository.findWorkerByUsername(username);
-    return optionalWorker.orElse(null);
+  @Transactional
+  public WorkerDetailsImpl loadUserByUsername(String username) {
+   var worker= workerRepository.findWorkerByUsername(username).orElseThrow(() -> new EntityNotFoundException("no any user name"));
+   return WorkerDetailsImpl.build(worker);
   }
 
   @Override
