@@ -28,7 +28,7 @@ class WorkerServiceTest {
   @Test
   void findWorkerByUsername() {
     when(workerRepository.findWorkerByUsername("volkan"))
-        .thenReturn(Optional.of(new Worker("volkan", "test")));
+        .thenReturn(Optional.of(new Worker("volkan", "test@gmail.com","test")));
 
     var testWorker = workerService.loadUserByUsername("volkan");
 
@@ -38,7 +38,7 @@ class WorkerServiceTest {
   @Test
   void findWorkerByUsernameFalse() {
     when(workerRepository.findWorkerByUsername("volkan"))
-        .thenReturn(Optional.of(new Worker("volkan", "test")));
+        .thenReturn(Optional.of(new Worker("volkan", "test@gmail.com", "test" )));
 
     var testWorker = workerService.loadUserByUsername("volkan");
 
@@ -47,21 +47,21 @@ class WorkerServiceTest {
 
   @Test
   void registerService() {
-    var worker = new Worker("volkan", "test");
+    var worker = new Worker("volkan", "test@gmail.com", "test");
     when(workerRepository.save(worker)).thenReturn(worker);
 
     var testWorker = workerService.register(worker);
 
-    Assertions.assertTrue(testWorker.isSuccess);
+    Assertions.assertTrue(testWorker.isSuccess());
   }
 
   @Test
   void registerServiceFalse() {
-    var worker = new Worker("volkan", "test");
+    var worker = new Worker("volkan", "test@gmail.com", "test");
     when(workerService.register(worker)).thenReturn(new ErrorResult(false, "something happen"));
 
     var testWorker = workerService.register(worker);
 
-    Assertions.assertFalse(testWorker.isSuccess);
+    Assertions.assertFalse(testWorker.isSuccess());
   }
 }
