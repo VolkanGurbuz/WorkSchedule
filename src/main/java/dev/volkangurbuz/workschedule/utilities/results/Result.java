@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Result {
-
-  public boolean isSuccess;
-  public String message;
+  private boolean isSuccess;
+  private String message;
 }
