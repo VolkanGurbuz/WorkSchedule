@@ -1,12 +1,17 @@
 package dev.volkangurbuz.workschedule.model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
 @NoArgsConstructor
+@Getter
+@Setter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +23,10 @@ public class Role {
 
     public Role(ERole name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return  name.name();
     }
 }
