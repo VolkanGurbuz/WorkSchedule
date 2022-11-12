@@ -45,6 +45,6 @@ class ScheduleControllerTest {
     mockMvc
         .perform(MockMvcRequestBuilders.get("/index"))
         .andExpect(status().isOk())
-        .andExpect(view().name("index"));
+        .andExpect(view().name("templates/index.html"));
   }
 }
