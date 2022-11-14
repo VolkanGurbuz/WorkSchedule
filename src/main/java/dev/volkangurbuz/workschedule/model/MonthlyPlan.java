@@ -33,6 +33,10 @@ public class MonthlyPlan {
   @OneToMany(mappedBy = "monthlyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Shift> shifts;
 
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
+  private EMonthYear name;
+
   public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
     this.workerList = workerList;
     this.exceptions = exceptions;
