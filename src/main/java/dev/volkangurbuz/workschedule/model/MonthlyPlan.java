@@ -9,9 +9,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
+@Entity(name = "MonthlyPlan")
+@Table(name = "monthly_plan")
 @NoArgsConstructor
 public class MonthlyPlan {
   @Id
@@ -27,6 +29,13 @@ public class MonthlyPlan {
   @CreationTimestamp
   @JsonFormat(pattern = "dd-MM-yyyy")
   Date date;
+
+  @OneToMany(mappedBy = "monthlyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Shift> shifts;
+
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
+  private EMonthYear name;
 
   public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
     this.workerList = workerList;
