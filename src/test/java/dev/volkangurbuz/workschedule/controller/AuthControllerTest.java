@@ -51,7 +51,7 @@ class AuthControllerTest {
 
     mockMvc
         .perform(
-            post("/register/")
+            post("/api/auth/signin/")
                 .flashAttr(
                     "workerDTO", new WorkerDTO(1L, "dummyUser", "passwprd", ERole.ROLE_ADMIN)))
         .andExpect(status().isCreated());
