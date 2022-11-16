@@ -1,3 +1,8 @@
 package dev.volkangurbuz.workschedule.services;
 
-public interface ScheduleService {}
+import dev.volkangurbuz.workschedule.model.MonthlyPlan;
+
+public interface ScheduleService {
+
+  MonthlyPlan createMonthlyPlan(MonthlyPlan monthlyPlan);
+}

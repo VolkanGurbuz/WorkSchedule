@@ -2,7 +2,9 @@ package dev.volkangurbuz.workschedule.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +17,8 @@ import java.util.Set;
 @Entity(name = "MonthlyPlan")
 @Table(name = "monthly_plan")
 @NoArgsConstructor
+@Setter
+@Getter
 public class MonthlyPlan {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
