@@ -16,8 +16,6 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Override
   public MonthlyPlan createMonthlyPlan(MonthlyPlan monthlyPlan) {
 
-    scheduleRepository.save(monthlyPlan);
-
-    return monthlyPlan;
+    return scheduleRepository.save(monthlyPlan);
   }
 }
