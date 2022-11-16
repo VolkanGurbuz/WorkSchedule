@@ -4,5 +4,5 @@ import dev.volkangurbuz.workschedule.model.MonthlyPlan;
 
 public interface ScheduleService {
 
-  MonthlyPlan createMonthlyPlan(MonthlyPlan monthlyPlan);
+  MonthlyPlan createMonthlyPlan();
 }

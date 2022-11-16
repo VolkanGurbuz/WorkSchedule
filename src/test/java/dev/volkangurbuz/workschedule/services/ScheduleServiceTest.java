@@ -43,7 +43,7 @@ class ScheduleServiceTest {
     m.setName(EMonthYear.JULY);
     when(scheduleRepository.save(any(MonthlyPlan.class))).thenReturn(m);
 
-    var testWorker = scheduleService.createMonthlyPlan(m);
+    var testWorker = scheduleService.createMonthlyPlan();
 
     Assertions.assertEquals(EMonthYear.JULY, testWorker.getName());
   }

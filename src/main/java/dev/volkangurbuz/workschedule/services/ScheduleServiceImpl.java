@@ -1,5 +1,6 @@
 package dev.volkangurbuz.workschedule.services;
 
+import dev.volkangurbuz.workschedule.model.EMonthYear;
 import dev.volkangurbuz.workschedule.model.MonthlyPlan;
 import dev.volkangurbuz.workschedule.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public MonthlyPlan createMonthlyPlan(MonthlyPlan monthlyPlan) {
-
+  public MonthlyPlan createMonthlyPlan() {
+    var monthlyPlan = new MonthlyPlan();
     return scheduleRepository.save(monthlyPlan);
   }
 }
