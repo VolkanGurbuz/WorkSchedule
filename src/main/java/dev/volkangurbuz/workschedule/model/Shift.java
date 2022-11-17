@@ -24,12 +24,22 @@ public class Shift {
   Long id;
 
   @CreationTimestamp
-  @JsonFormat(pattern = "dd-MM-yyyy")
+  @JsonFormat(
+      shape = JsonFormat.Shape.STRING,
+      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ",
+      locale = "en_GB")
   Date shiftStart;
 
   @CreationTimestamp
-  @JsonFormat(pattern = "dd-MM-yyyy")
+  @JsonFormat(
+      shape = JsonFormat.Shape.STRING,
+      pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ",
+      locale = "en_GB")
   Date shiftEnd;
+
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20, nullable = false)
+  private EShiftType eShiftType;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private MonthlyPlan monthlyPlan;

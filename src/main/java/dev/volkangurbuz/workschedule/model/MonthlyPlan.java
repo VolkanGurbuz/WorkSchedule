@@ -38,8 +38,8 @@ public class MonthlyPlan {
   private Set<Shift> shifts;
 
   @Enumerated(EnumType.STRING)
-  @Column(length = 20)
-  private EMonthYear name;
+  @Column(length = 20, nullable = false)
+  private EMonthYear eMonthYear;
 
   public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
     this.workerList = workerList;

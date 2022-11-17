@@ -15,6 +15,6 @@ public class Reason {
 
   @OneToOne Worker worker;
 
-  ReasonLevel exceptionLevel;
+  EReasonLevel exceptionLevel;
   Date date;
 }
