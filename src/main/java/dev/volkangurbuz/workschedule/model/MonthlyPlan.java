@@ -31,8 +31,9 @@ public class MonthlyPlan {
   List<Reason> exceptions;
 
   @CreationTimestamp
-  @JsonFormat(pattern = "dd-MM-yyyy")
-  Date date;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "create_date")
+  private Date createDate;
 
   @OneToMany(mappedBy = "monthlyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Shift> shifts;
@@ -44,6 +45,6 @@ public class MonthlyPlan {
   public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
     this.workerList = workerList;
     this.exceptions = exceptions;
-    this.date = date;
+    this.createDate = date;
   }
 }

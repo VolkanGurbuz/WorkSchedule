@@ -40,11 +40,12 @@ class ScheduleServiceTest {
   @Test
   void saveWorkPlan() {
     MonthlyPlan m = new MonthlyPlan();
-    m.setName(EMonthYear.JULY);
+    m.setEMonthYear(EMonthYear.JULY);
+    Worker w = new Worker();
     when(scheduleRepository.save(any(MonthlyPlan.class))).thenReturn(m);
 
-    var testWorker = scheduleService.createMonthlyPlan();
+    var testWorker = scheduleService.createMonthlyPlan(w, EMonthYear.JULY);
 
-    Assertions.assertEquals(EMonthYear.JULY, testWorker.getName());
+    Assertions.assertEquals(EMonthYear.JULY, testWorker.get().getEMonthYear());
   }
 }
