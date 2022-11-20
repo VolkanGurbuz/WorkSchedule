@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ScheduleService {
 
-  Optional<MonthlyPlan> createMonthlyPlan(Worker worker, EMonthYear eMonthYear);
+  MonthlyPlan createMonthlyPlan(EMonthYear eMonthYear);
 }

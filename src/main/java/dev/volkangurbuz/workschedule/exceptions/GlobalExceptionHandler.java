@@ -34,6 +34,16 @@ public class GlobalExceptionHandler {
     body.put("message", "Internal server error");
 
     return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
 
+  @ExceptionHandler(ScheduleFoundException.class)
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public ResponseEntity<Object> scheduleFoundException(
+      RuntimeException exception, WebRequest request) {
+    Map<String, Object> body = new LinkedHashMap<>();
+    body.put("timestamp", LocalDateTime.now());
+    body.put("message", "Internal server error");
+
+    return new ResponseEntity<>(body, HttpStatus.CONFLICT);
   }
 }
