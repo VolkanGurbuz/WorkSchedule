@@ -1,6 +1,5 @@
 package dev.volkangurbuz.workschedule.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

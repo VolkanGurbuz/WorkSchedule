@@ -2,7 +2,6 @@ package dev.volkangurbuz.workschedule.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -43,7 +42,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<Object> unAuthhorizedError(RuntimeException exception, WebRequest request) {
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("timestamp", LocalDateTime.now());
-    body.put("message", "Please choice correct tiem format which is dd.MM.yyyy!");
+    body.put("message", "Please choice correct time format which is yyyy.MM.dd!");
 
     return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
   }
@@ -54,7 +53,7 @@ public class GlobalExceptionHandler {
       RuntimeException exception, WebRequest request) {
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("timestamp", LocalDateTime.now());
-    body.put("message", "Internal server error");
+    body.put("message", "Plan is already created for that month! ");
 
     return new ResponseEntity<>(body, HttpStatus.CONFLICT);
   }

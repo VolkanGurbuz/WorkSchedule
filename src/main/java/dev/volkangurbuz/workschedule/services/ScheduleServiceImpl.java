@@ -5,11 +5,14 @@ import dev.volkangurbuz.workschedule.model.*;
 import dev.volkangurbuz.workschedule.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
+
+  final DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
   final ScheduleRepository scheduleRepository;
 
@@ -19,9 +22,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
   @Override
   public MonthlyPlan createMonthlyPlan(Date eMonthYear) {
-    //    if (scheduleRepository.existsByeMonthYear(eMonthYear)) {
-    //      throw new ScheduleFoundException("Plan is already created!");
-    //    }
+
+    if (scheduleRepository.isScheduleExists(dateFormat.format(eMonthYear))) {
+      throw new ScheduleFoundException("Plan is already created!");
+    }
 
     var monthlyPlan = new MonthlyPlan();
     return scheduleRepository.save(monthlyPlan);
