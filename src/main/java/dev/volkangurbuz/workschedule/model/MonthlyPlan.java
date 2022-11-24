@@ -1,8 +1,9 @@
 package dev.volkangurbuz.workschedule.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +16,8 @@ import java.util.Set;
 @Entity(name = "MonthlyPlan")
 @Table(name = "monthly_plan")
 @NoArgsConstructor
+@Setter
+@Getter
 public class MonthlyPlan {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,19 +30,16 @@ public class MonthlyPlan {
   List<Reason> exceptions;
 
   @CreationTimestamp
-  @JsonFormat(pattern = "dd-MM-yyyy")
-  Date date;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "create_date")
+  private Date createDate;
 
   @OneToMany(mappedBy = "monthlyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Shift> shifts;
 
-  @Enumerated(EnumType.STRING)
-  @Column(length = 20)
-  private EMonthYear name;
-
   public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
     this.workerList = workerList;
     this.exceptions = exceptions;
-    this.date = date;
+    this.createDate = date;
   }
 }

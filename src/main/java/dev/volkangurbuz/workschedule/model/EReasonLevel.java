@@ -1,6 +1,6 @@
 package dev.volkangurbuz.workschedule.model;
 
-public enum ReasonLevel {
+public enum EReasonLevel {
   HIGH,
   MEDIUM,
   LOW
