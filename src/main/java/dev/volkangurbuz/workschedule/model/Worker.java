@@ -53,7 +53,7 @@ public class Worker implements Serializable {
   private Set<Role> roles = new HashSet<>();
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-  List<Shift> shifts;
+  transient Set<Shift> shifts;
 
   public Worker(String username, String email, String password) {
     this.username = username;

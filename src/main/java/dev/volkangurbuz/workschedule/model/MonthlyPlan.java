@@ -30,11 +30,11 @@ public class MonthlyPlan implements Serializable {
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
   @JsonIgnore
-  Set<Worker> workerList;
+  transient Set<Worker> workerList;
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
   @JsonIgnore
-  Set<Reason> exceptions;
+  transient Set<Reason> exceptions;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
