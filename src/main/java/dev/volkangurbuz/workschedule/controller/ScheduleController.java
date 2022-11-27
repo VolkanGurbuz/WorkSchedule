@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.Date;
 
 @RestController
@@ -25,10 +24,20 @@ public class ScheduleController {
   @PostMapping("/createSchedule")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<MonthlyPlan> createPlan(
-      @RequestParam @DateTimeFormat(pattern = "yyyy.MM.dd") Date eMonthYear) throws ParseException {
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date eMonthYear) {
 
-    var optionalMonthlyPlan = scheduleService.createMonthlyPlan(eMonthYear);
+    var monthlyPlan = scheduleService.createMonthlyPlan(eMonthYear);
 
-    return new ResponseEntity<>(optionalMonthlyPlan, HttpStatus.CREATED);
+    return new ResponseEntity<>(monthlyPlan, HttpStatus.CREATED);
+  }
+
+  @PostMapping("/getSchedule")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+  public ResponseEntity<MonthlyPlan> getPlan(
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date eMonthYear) {
+
+    var monthlyPlan = scheduleService.getMonthlyPlan(eMonthYear);
+
+    return new ResponseEntity<>(monthlyPlan, HttpStatus.OK);
   }
 }

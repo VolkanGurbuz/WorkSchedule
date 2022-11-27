@@ -1,5 +1,6 @@
 package dev.volkangurbuz.workschedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -18,16 +20,21 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-public class MonthlyPlan {
+public class MonthlyPlan implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-  List<Worker> workerList;
+  @JsonIgnore
+  transient Set<Worker> workerList;
 
   @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-  List<Reason> exceptions;
+  @JsonIgnore
+  transient Set<Reason> exceptions;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
@@ -35,9 +42,10 @@ public class MonthlyPlan {
   private Date createDate;
 
   @OneToMany(mappedBy = "monthlyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private Set<Shift> shifts;
 
-  public MonthlyPlan(List<Worker> workerList, List<Reason> exceptions, Date date) {
+  public MonthlyPlan(Set<Worker> workerList, Set<Reason> exceptions, Date date) {
     this.workerList = workerList;
     this.exceptions = exceptions;
     this.createDate = date;
