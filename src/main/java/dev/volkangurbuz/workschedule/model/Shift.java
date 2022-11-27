@@ -1,6 +1,7 @@
 package dev.volkangurbuz.workschedule.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(name = "Shift")
@@ -17,7 +19,9 @@ import java.util.Date;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Shift {
+public class Shift implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,5 +46,6 @@ public class Shift {
   private EShiftType eShiftType;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @JsonIgnore
   private MonthlyPlan monthlyPlan;
 }

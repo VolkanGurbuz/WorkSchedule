@@ -8,4 +8,6 @@ import java.util.Date;
 public interface ScheduleService {
 
   MonthlyPlan createMonthlyPlan(Date date) throws ParseException;
+
+  MonthlyPlan getMonthlyPlan(Date date);
 }

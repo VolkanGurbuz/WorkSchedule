@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<Object> unAuthhorizedError(RuntimeException exception, WebRequest request) {
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("timestamp", LocalDateTime.now());
-    body.put("message", "Please choice correct time format which is yyyy.MM.dd!");
+    body.put("message", "Please choice correct time format which is yyyy-MM-dd!");
 
     return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
   }
