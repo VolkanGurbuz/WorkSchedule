@@ -16,9 +16,7 @@ import java.util.Date;
 public class ScheduleServiceImpl implements ScheduleService {
   private final Logger logger = LogManager.getLogger(this.getClass().getName());
   final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
   final ScheduleRepository scheduleRepository;
-
   public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
     this.scheduleRepository = scheduleRepository;
   }
