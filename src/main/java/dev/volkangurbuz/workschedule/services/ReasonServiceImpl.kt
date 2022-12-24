@@ -4,8 +4,10 @@ import dev.volkangurbuz.workschedule.model.EReasonLevel
 import dev.volkangurbuz.workschedule.model.Reason
 import dev.volkangurbuz.workschedule.repositories.ReasonRepository
 import dev.volkangurbuz.workschedule.repositories.WorkerRepository
+import org.springframework.stereotype.Service
 import java.util.*
 
+@Service
 class ReasonServiceImpl(
     private val reasonRepository: ReasonRepository,
     private val workerRepository: WorkerRepository
