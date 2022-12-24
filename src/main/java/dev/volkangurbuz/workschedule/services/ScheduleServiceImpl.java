@@ -44,4 +44,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     return monthlyPlan.get();
   }
+
+  private MonthlyPlan prepareMonthlyPlan(Date date){
+
+    return null;
+  }
+
 }
