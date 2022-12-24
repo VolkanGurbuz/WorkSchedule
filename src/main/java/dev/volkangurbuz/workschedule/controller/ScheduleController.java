@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
+/**
+ * @deprecated
+ * should be replaced with kotlin/controller/ScheduleController
+ */
+@Deprecated(forRemoval = true)
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api")

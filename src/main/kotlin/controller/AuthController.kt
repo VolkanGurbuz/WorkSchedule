@@ -17,10 +17,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
+@RestController
+@CrossOrigin(origins = arrayOf("*"), maxAge = 3600)
 class AuthController(
     private val authenticationManager: AuthenticationManager,
     private val roleRepository: RoleRepository,
