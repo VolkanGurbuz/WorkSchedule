@@ -17,7 +17,7 @@ Way to use Spring Data JPA to interact with MySQL Database
  | Recommended | Reference | Notes |
 | ----------- | --------- | ----- |
 | Oracle Java 11 JDK 
-| IntelliJ 2018 or Higher | [Download](https://www.jetbrains.com/idea/download/) | Ultimate Edition recommended. Students can get a free 120 trial license [here](https://github.com/springframeworkguru/spring5webapp/wiki/Which-IDE-to-Use%3F#how-do-i-get-the-free-120-day-trial-to-intellij-ultimate) |
+| IntelliJ 2018 or Higher | [Download](https://www.jetbrains.com/idea/download/) |  |
 | Maven 3.6.0 or higher | [Download](https://maven.apache.org/download.cgi) | [Installation Instructions](https://maven.apache.org/install.html)|
 | Mysql | [Download](https://dev.mysql.com/downloads/) |
 | Gradle 4.8 or higher | [Download](https://gradle.org/install/) | **Note:** Use Version 5 or higher if using Java 11 |
