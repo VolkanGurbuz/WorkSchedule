@@ -16,18 +16,17 @@ public class Reason implements Serializable {
 
   private static final long serialVersionUID = 2L;
 
-  public Reason(Worker worker, Date date,EReasonLevel exceptionLevel) {
+  public Reason(Worker worker, EShiftType exceptionShiftType,EReasonLevel exceptionLevel) {
     this.worker = worker;
     this.exceptionLevel = exceptionLevel;
-    this.exceptionDate= date;
+    this.exceptionShiftType= exceptionShiftType;
   }
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
   @OneToOne Worker worker;
 
-  @Column(name = "exception_date")
-  Date exceptionDate;
+  EShiftType exceptionShiftType;
 
   EReasonLevel exceptionLevel;
 
