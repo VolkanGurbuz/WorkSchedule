@@ -7,9 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Result {
   private boolean isSuccess;
   private String message;
+
+  public Result(boolean isSuccess, String message) {
+    this.isSuccess = isSuccess;
+    this.message = message;
+  }
 }

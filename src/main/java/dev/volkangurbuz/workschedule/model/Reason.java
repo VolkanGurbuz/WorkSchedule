@@ -16,21 +16,33 @@ public class Reason implements Serializable {
 
   private static final long serialVersionUID = 2L;
 
-  public Reason(Worker worker, EReasonLevel exceptionLevel, Date date) {
+  public Reason(Worker worker, Date date,EReasonLevel exceptionLevel) {
     this.worker = worker;
     this.exceptionLevel = exceptionLevel;
-    this.date = date;
+    this.exceptionDate= date;
   }
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
-
   @OneToOne Worker worker;
 
+  @Column(name = "exception_date")
+  Date exceptionDate;
+
   EReasonLevel exceptionLevel;
+
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "create_date")
-  Date date;
+  Date createDate;
+
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "modified_date")
+  Date modifiedDate;
+
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "deleted_date")
+  Date deletedDate;
 }
