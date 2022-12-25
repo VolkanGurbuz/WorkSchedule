@@ -5,6 +5,7 @@ import dev.volkangurbuz.workschedule.services.ReasonServiceImpl
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,12 +21,12 @@ class ReasonController(private val reasonServiceImpl: ReasonServiceImpl) {
     private val log = LoggerFactory.getLogger(ReasonController::class.java)
 
     @PostMapping("/add-reason")
-    fun addReason(@RequestBody reasonRequest: ReasonRequestDTO): ResponseEntity<Void> {
+    fun addReason(@RequestBody reasonRequest: ReasonRequestDTO): ResponseEntity<Unit> {
         return try {
             reasonServiceImpl.addReason(reasonRequest.workerId, reasonRequest.date, reasonRequest.eReasonLevel)
             ResponseEntity.ok().build()
         } catch (e: java.lang.Exception) {
-            log.error("Unexpected error while updating billing address.", e)
+            log.error("Unexpected error while updating billing address. {}", e.message)
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
         }
     }

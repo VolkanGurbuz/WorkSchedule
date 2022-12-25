@@ -12,12 +12,12 @@ class ReasonServiceImpl(
     private val reasonRepository: ReasonRepository,
     private val workerRepository: WorkerRepository
 ) : ReasonService {
-    override fun addReason(workerId: Long, date: Date, eReasonLevel: EReasonLevel) {
+    override fun addReason(workerId: Long, date: Date, exceptionLevel: EReasonLevel) {
         val worker =
             workerRepository.findById(workerId)
         if (worker.isEmpty) throw NoSuchElementException("No found any worker with this id")
 
-        val reason = Reason(worker.get(), eReasonLevel, date)
+        val reason = Reason(worker.get(), date, exceptionLevel)
         reasonRepository.save(reason)
     }
 }
